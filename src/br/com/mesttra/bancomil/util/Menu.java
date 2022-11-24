@@ -30,11 +30,34 @@ public class Menu {
 		System.out.print("\t OPERAÇÃO: ");
 	}
 
-	public void consultarCliente() {
+	public void opcaoConsulta() {
 		System.out.println("====================-Consulta de cliente-====================");
+		System.out.println("OPERAÇÕES:");
+		System.out.println("\t - Consultar cliente PJ \t\t [1]");
+		System.out.println("\t - Consultar cliente PF \t\t [2]\n");
+		System.out.println("\t - CANCELAR OPERAÇÃO \t\t\t [0]\n");
+		System.out.print("\t OPERAÇÃO: ");
+	}
+	
+	public void consultarClientePj() {
+		System.out.println("====================-Consulta de cliente PJ-====================");
 		System.out.print("Número da conta: ");
 	}
-
+	
+	public void consultarClientePf() {
+		System.out.println("====================-Consulta de cliente PF-====================");
+		System.out.print("Número da conta: ");
+	}
+	
+	public void opcaoRemocao() {
+		System.out.println("====================-Remover cliente-====================");
+		System.out.println("OPERAÇÕES:");
+		System.out.println("\t - Remover cliente PJ \t\t [1]");
+		System.out.println("\t - Remover cliente PF \t\t [2]\n");
+		System.out.println("\t - CANCELAR OPERAÇÃO \t\t\t [0]\n");
+		System.out.print("\t OPERAÇÃO: ");
+	}
+	
 	public void removerCliente() {
 		System.out.println("====================-Remover cliente-====================");
 		System.out.print("Número da conta: ");

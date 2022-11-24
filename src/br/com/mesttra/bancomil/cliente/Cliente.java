@@ -17,7 +17,9 @@ public abstract class Cliente {
 		this.limite = limite;
 		this.saldo = saldo;
 	}
-
+	
+	public Cliente() {}
+	
 	public void transfere(Double valor, Cliente destino) throws SaldoInsuficienteException {
 		this.saca(valor);
 		destino.deposita(valor);

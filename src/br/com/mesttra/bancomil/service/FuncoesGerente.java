@@ -1,5 +1,6 @@
 package br.com.mesttra.bancomil.service;
 
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.mesttra.bancomil.cliente.Cliente;
@@ -13,7 +14,7 @@ public class FuncoesGerente {
 
 	int qtdClientes = 48;
 
-	public int cadastrarClientePj(Cliente[] clientes, int cadastrados) {
+	public ClientePj cadastrarClientePj() {
 
 		input = new Scanner(System.in);
 		System.out.print("Numero: ");
@@ -28,7 +29,7 @@ public class FuncoesGerente {
 		String telefone = input.nextLine();
 
 		Double saldo = 0.0;
-		
+
 		input = new Scanner(System.in);
 		System.out.print("Limite incial: ");
 		Double limite = input.nextDouble();
@@ -38,10 +39,6 @@ public class FuncoesGerente {
 		String cnpj = input.nextLine();
 
 		input = new Scanner(System.in);
-		System.out.print("Quantidade de sócios: ");
-		Integer qtdSocios = input.nextInt();
-
-		input = new Scanner(System.in);
 		System.out.print("Razão social: ");
 		String nomeSocial = input.nextLine();
 
@@ -49,15 +46,12 @@ public class FuncoesGerente {
 		System.out.print("Nome fantasia: ");
 		String nomeFantasia = input.nextLine();
 
-		clientes[cadastrados] = new ClientePj(numero, agencia, telefone, saldo, limite, cnpj, 
-				nomeSocial, nomeFantasia);
-		cadastrados++;
+		ClientePj cliente = new ClientePj(numero, agencia, telefone, saldo, limite, cnpj, nomeSocial, nomeFantasia);
 		System.out.println("CLIENTE " + nomeSocial + " CADASTRADO COM NUMERO: " + numero);
-		return cadastrados;
+		return cliente;
 	}
 
-
-	public int cadastrarClientePf(Cliente[] clientes, int cadastrados) {
+	public ClientePf cadastrarClientePf() {
 		input = new Scanner(System.in);
 		System.out.print("CPF: ");
 		String cpf = input.nextLine();
@@ -88,57 +82,48 @@ public class FuncoesGerente {
 		System.out.print("Limite incial: ");
 		Double limite = input.nextDouble();
 
-
-		clientes[cadastrados] = new ClientePf(numero, agencia, telefone, saldo, limite, cpf, nome, idade);
+		ClientePf cliente = new ClientePf(numero, agencia, telefone, saldo, limite, cpf, nome, idade);
 		System.out.println("CLIENTE " + nome + " CADASTRADO COM NUMERO: " + numero);
-		cadastrados++;
-		return cadastrados;
+		return cliente;
 	}
 
-	public void removerCliente(Integer numero, Cliente[] clientes) {
-		for (int i = 0; i <= qtdClientes; i++) {
-			if ((clientes[i] != null) && clientes[i].getNumero().compareTo(numero) == 0) {
-				clientes[i] = null;
+	public void removerCliente(Integer numero, List<Cliente> clientes) {
+
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getNumero() == numero) {
+				clientes.remove(i);
 				System.out.println("CLIENTE FOI REMOVIDO COM SUCESSO");
-				break;
+
 			}
 		}
 	}
 
-	public String consultarCliente(Integer numero, Cliente[] clientes) {
-		for (int i = 0; i < qtdCadastros(clientes); i++) {
-			if ((clientes[i] != null) && clientes[i].getNumero().compareTo(numero) == 0) {
-				return (clientes[i].toString());
-			}
+	public Cliente consultarCliente(Integer numero, List<Cliente> clientes) {
+		for (int i = 0; i < clientes.size(); i++) {
+			return (clientes.get(i).getNumero() == numero) ? clientes.get(i) : null;
 		}
-		throw new NullPointerException();
+		return null;
 	}
 
-	public void fazerTransferencia(Integer contaFonte, Double valor, Integer contaDestino, Cliente[] clientes)
+	public void fazerTransferencia(Integer contaFonte, Double valor, Integer contaDestino, List<Cliente> clientes)
 			throws SaldoInsuficienteException {
 		Cliente clienteDestino = null;
-		for (int j = 0; j < qtdClientes; j++) {
-			if ((clientes[j] != null) && clientes[j].getNumero().compareTo(contaDestino) == 0) {
-				clienteDestino = clientes[j];
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getNumero() == contaDestino) {
+				Cliente clinteDestino = clientes.get(i);
 			}
-		}
-
-		for (int i = 0; i <= qtdClientes; i++) {
-			if ((clientes[i] != null) && clientes[i].getNumero().compareTo(contaFonte) == 0) {
-				clientes[i].transfere(valor, clienteDestino);
-				System.out.println("TRANSFERENCIA REALIZADA COM SUCESSO");
-				break;
+			if (clientes.get(i).getNumero() == contaFonte) {
+				Cliente clienteFonte = clientes.get(i);
+				clienteFonte.transfere(valor, clienteDestino);
 			}
 		}
 	}
 
-	public void adicionarSaldo(Integer numero, Double valor, Cliente[] clientes) {
+	public void adicionarSaldo(Integer numero, Double valor, List<Cliente> clientes) {
 		if (valor > 0) {
-			for (int j = 0; j <= qtdClientes; j++) {
-				if ((clientes[j] != null) && clientes[j].getNumero().compareTo(numero) == 0) {
-					clientes[j].deposita(valor);
-					System.out.println("DEPÓSITO EFETUADO COM SUCESSO");
-					break;
+			for (int i = 0; i < clientes.size(); i++) {
+				if (clientes.get(i).getNumero() == numero) {
+					clientes.get(i).deposita(valor);
 				}
 			}
 		} else {
@@ -146,48 +131,31 @@ public class FuncoesGerente {
 		}
 	}
 
-	public void relatorio(Cliente[] clientes) {
-		for (int j = 0; j <= qtdClientes; j++) {
-			if (clientes[j] != null) {
-				System.out.print(clientes[j]);
-				System.out.println("------------------------------");
+	public void relatorio(List<Cliente> clientes) {
+		clientes.forEach(System.out::println);
+	}
+
+	public void alterarLimite(Integer numero, Double novoLimite, List<Cliente> clientes) {
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getNumero() == numero) {
+				clientes.get(i).setLimite(novoLimite);
 			}
 		}
 	}
 
-	public void alterarLimite(Integer numero, Double novoLimite, Cliente[] clientes) {
-		for (int j = 0; j <= qtdClientes; j++) {
-			if ((clientes[j] != null) && clientes[j].getNumero().compareTo(numero) == 0) {
-				clientes[j].setLimite(novoLimite);
-				System.out.println("LIMITE ALTERADO COM SUCESSO");
-				break;
-			}
-		}
-	}
-
-	public Double consultaLimite(Integer numero, Cliente[] clientes) {
-		for (int i = 0; i <= qtdClientes; i++) {
-			if ((clientes[i] != null) && clientes[i].getNumero().compareTo(numero) == 0) {
-				return clientes[i].getLimite();
+	public Double consultaLimite(Integer numero, List<Cliente> clientes) {
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getNumero() == numero) {
+				return clientes.get(i).getLimite();
 			}
 		}
 		return 0.0;
 	}
 
-	public int qtdCadastros(Cliente[] clientes) {
-		int qtdCadastros = 0;
-		for (int i = 0; i < qtdClientes; i++) {
-			if (clientes[i] != null) {
-				qtdCadastros++;
-			}
-		}
-		return qtdCadastros;
-	}
-
-	public void consultarClientesNegativados(Cliente[] clientes) {
-		for (int i = 0; i < qtdClientes; i++) {
-			if ((clientes[i] != null) && clientes[i].getSaldo() < 0) {
-				System.out.println(clientes[i]);
+	public void consultarClientesNegativados(List<Cliente> clientes) {
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getSaldo() < 0) {
+				System.out.println(clientes.get(i));
 				System.out.println("------------------------------");
 			}
 		}
