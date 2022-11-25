@@ -85,3 +85,6 @@ Todas as mudanças são realizadas no banco de dados depois de uma verificação
 </p>
 </p>
 
+<h2 id="funcionamento">:eye_speech_bubble: Funcionamento</h2>
+
+   ![gif](https://github.com/vitucomment/Exercicio-Banco1000-V2/blob/master/gif/loom-message-25-november-2022-dsc9y2r2_mTCqwTnO.gif)
