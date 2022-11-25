@@ -54,7 +54,7 @@ public class Menu {
 		System.out.println("OPERAÇÕES:");
 		System.out.println("\t - Remover cliente PJ \t\t [1]");
 		System.out.println("\t - Remover cliente PF \t\t [2]\n");
-		System.out.println("\t - CANCELAR OPERAÇÃO \t\t\t [0]\n");
+		System.out.println("\t - CANCELAR OPERAÇÃO \t\t [0]\n");
 		System.out.print("\t OPERAÇÃO: ");
 	}
 	

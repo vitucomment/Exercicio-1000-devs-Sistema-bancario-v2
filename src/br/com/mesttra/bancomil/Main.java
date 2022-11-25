@@ -20,7 +20,6 @@ public class Main {
 		FuncoesGerente gerente = new FuncoesGerente();
 		Menu ui = new Menu();
 		
-		List<Cliente> clientes = new ArrayList<>();
 
 		limpaConsole();
 		
@@ -28,6 +27,7 @@ public class Main {
 		while (flag) {
 			Integer numeroDaConta;
 			int operacao;
+			List<Cliente> clientes = new ArrayList<>();
 			clientes.addAll(dao.relatorio());
 			input = new Scanner(System.in);
 			ui.cabecalho();
@@ -169,7 +169,6 @@ public class Main {
 					flag = false;
 				}
 			} catch (NullPointerException ex) {
-				System.out.println("Usuário não encontrado.");
 			}
 		}
 
@@ -240,8 +239,7 @@ public class Main {
 			gerente.fazerTransferencia(numeroFonte, valorTrans, numeroDestino, clientes);
 			dao.realizarTransferenciaPfToPf(valorTrans, numeroFonte, numeroDestino);
 		} catch (SaldoInsuficienteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -258,8 +256,7 @@ public class Main {
 			gerente.fazerTransferencia(numeroFonte, valorTrans, numeroDestino, clientes);
 			dao.realizarTransferenciaPfToPj(valorTrans, numeroFonte, numeroDestino);
 		} catch (SaldoInsuficienteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -277,8 +274,7 @@ public class Main {
 			gerente.fazerTransferencia(numeroFonte, valorTrans, numeroDestino, clientes);
 			dao.realizarTransferenciaPjToPj(valorTrans, numeroFonte, numeroDestino);
 		} catch (SaldoInsuficienteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -296,9 +292,9 @@ public class Main {
 			gerente.fazerTransferencia(numeroFonte, valorTrans, numeroDestino, clientes);
 			dao.realizarTransferenciaPjToPf(valorTrans, numeroFonte, numeroDestino);
 		} catch (SaldoInsuficienteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
+		
 	}
 
 	

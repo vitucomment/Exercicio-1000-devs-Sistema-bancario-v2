@@ -91,7 +91,7 @@ public class FuncoesGerente {
 	public void removerCliente(Integer numero, List<Cliente> clientes) {
 
 		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i).getNumero() == numero) {
+			if (clientes.get(i).getNumero().equals(numero)) {
 				clientes.remove(i);
 				System.out.println("CLIENTE FOI REMOVIDO COM SUCESSO");
 
@@ -101,7 +101,7 @@ public class FuncoesGerente {
 
 	public Cliente consultarCliente(Integer numero, List<Cliente> clientes) {
 		for (int i = 0; i < clientes.size(); i++) {
-			return (clientes.get(i).getNumero() == numero) ? clientes.get(i) : null;
+			return (clientes.get(i).getNumero().equals(numero)) ? clientes.get(i) : null;
 		}
 		return null;
 	}
@@ -110,20 +110,27 @@ public class FuncoesGerente {
 			throws SaldoInsuficienteException {
 		Cliente clienteDestino = null;
 		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i).getNumero() == contaDestino) {
-				Cliente clinteDestino = clientes.get(i);
-			}
-			if (clientes.get(i).getNumero() == contaFonte) {
-				Cliente clienteFonte = clientes.get(i);
-				clienteFonte.transfere(valor, clienteDestino);
+			Cliente teste = clientes.get(i);
+			if(teste.getNumero().equals(contaFonte)){
+				clienteDestino = teste;
 			}
 		}
+		for (int i = 0; i < clientes.size(); i++) {
+			Cliente teste2 = clientes.get(i);
+			if(teste2.getNumero().equals(contaFonte)){
+				teste2.transfere(valor, clienteDestino);;
+				
+			}
+		}
+		
+		
+		
 	}
 
 	public void adicionarSaldo(Integer numero, Double valor, List<Cliente> clientes) {
 		if (valor > 0) {
 			for (int i = 0; i < clientes.size(); i++) {
-				if (clientes.get(i).getNumero() == numero) {
+				if (clientes.get(i).getNumero().equals(numero)) {
 					clientes.get(i).deposita(valor);
 				}
 			}
@@ -138,14 +145,14 @@ public class FuncoesGerente {
 
 	public void alterarLimite(Integer numero, Double novoLimite, List<Cliente> clientes) {
 		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i).getNumero() == numero) {
+			if (clientes.get(i).getNumero().equals(numero)) {
 				clientes.get(i).setLimite(novoLimite);
 			}
 		}
 	}
 
 	public Double consultaLimite(Integer numero, List<Cliente> clientes) {
-		return clientes.stream().filter(c -> c.getNumero() == numero ).findFirst().get().getLimite();
+		return clientes.stream().filter(c -> c.getNumero().equals(numero)).findFirst().get().getLimite();
 
 	}
 
