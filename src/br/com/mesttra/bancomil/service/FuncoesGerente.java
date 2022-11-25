@@ -1,6 +1,7 @@
 package br.com.mesttra.bancomil.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import br.com.mesttra.bancomil.cliente.Cliente;
@@ -144,12 +145,8 @@ public class FuncoesGerente {
 	}
 
 	public Double consultaLimite(Integer numero, List<Cliente> clientes) {
-		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i).getNumero() == numero) {
-				return clientes.get(i).getLimite();
-			}
-		}
-		return 0.0;
+		return clientes.stream().filter(c -> c.getNumero() == numero ).findFirst().get().getLimite();
+
 	}
 
 	public void consultarClientesNegativados(List<Cliente> clientes) {

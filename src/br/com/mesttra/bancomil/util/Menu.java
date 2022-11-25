@@ -58,15 +58,47 @@ public class Menu {
 		System.out.print("\t OPERAÇÃO: ");
 	}
 	
+	public void opçoesTransferencia() {
+		System.out.println("====================-Realizar transferência-====================");
+		System.out.println("OPERAÇÕES:");
+		System.out.println("\t - Transferencia PJ -> PF \t\t [1]");
+		System.out.println("\t - Transferencia PJ -> PJ \t\t [2]");
+		System.out.println("\t - Transferencia PF -> PJ \t\t [3]");
+		System.out.println("\t - Transferencia PF -> PF \t\t [4]");
+		System.out.println("\t - CANCELAR OPERAÇÃO \t\t\t [0]\n");
+		System.out.print("\t OPERAÇÃO: ");
+	}
+	
+	
 	public void removerCliente() {
 		System.out.println("====================-Remover cliente-====================");
 		System.out.print("Número da conta: ");
 	}
 
-	public void transferenciaBancaria() {
-		System.out.println("====================-Realizar transferência-====================");
+	
+	public void opcaoAlterarLimite() {
+		System.out.println("====================-Alterar limite-====================");
+		System.out.println("OPERAÇÕES:");
+		System.out.println("\t - Alterar limite cliente PJ \t\t [1]");
+		System.out.println("\t - Alterar limite cliente PF \t\t [2]\n");
+		System.out.println("\t - CANCELAR OPERAÇÃO \t\t\t [0]\n");
+		System.out.print("\t OPERAÇÃO: ");
 	}
+	
 
+	public void transferenciaBancariaPjPf() {
+		System.out.println("====================-Realizar transferência PJ -> PF -====================");
+	}
+	public void transferenciaBancariaPjPj() {
+		System.out.println("====================-Realizar transferência PJ -> PJ -====================");
+	}
+	public void transferenciaBancariaPfPj() {
+		System.out.println("====================-Realizar transferência PF -> PJ -====================");
+	}
+	public void transferenciaBancariaPfPf() {
+		System.out.println("====================-Realizar transferência PF -> PF -====================");
+	}
+	
 	public void transFonte() {
 		System.out.print("Número da conta depositante: ");
 	}
@@ -87,6 +119,15 @@ public class Menu {
 	public void deposito() {
 		System.out.println("====================-Realizar depósito-====================");
 		System.out.print("Número da conta: ");
+	}
+	
+	public void opcaoDeposito() {
+			System.out.println("====================-Depositar-====================");
+			System.out.println("OPERAÇÕES:");
+			System.out.println("\t - Depositar em cliente PJ \t\t [1]");
+			System.out.println("\t - Depositar em cliente PF \t\t [2]\n");
+			System.out.println("\t - CANCELAR OPERAÇÃO \t\t\t [0]\n");
+			System.out.print("\t OPERAÇÃO: ");
 	}
 	
 	public void valorDeposito() {
